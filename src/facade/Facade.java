@@ -130,6 +130,8 @@ public class Facade {
 		if (m == null)
 			throw new Exception("Mesa nao localizada!");
 		Conta c = m.localizarContaEmAberto();
+		if (c == null)
+			c = criarConta(idmesa);
 		c.adicionar(p);
 	}
 	
