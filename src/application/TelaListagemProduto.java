@@ -84,8 +84,6 @@ public class TelaListagemProduto extends JFrame {
 				}
 			}
 		});
-		btnListar.setBounds(263, 228, 115, 23);
-		contentPane.add(btnListar);
 		
 		textArea = new JTextArea();
 		JScrollPane scroll = new JScrollPane(textArea);

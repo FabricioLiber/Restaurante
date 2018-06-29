@@ -54,9 +54,7 @@ public class Facade {
 	// Método responsável por criar todas as N mesas do restaurante  
 	public static void criarMesas (int qtd) throws Exception {
 		if (qtd <= 0)
-			throw new Exception("Valor negativo para quantidade de Mesas é inválido!");
-		if (qtd > 20)
-			throw new Exception("Excedeu o limite de 20 mesas!");
+			throw new Exception("Valor negativo para quantidade de Mesas invalido!");
 		for (int i = 1; i <= qtd; ++i)
 			restaurante.adicionar(new Mesa(i));
 	}
@@ -205,10 +203,18 @@ public class Facade {
 		
 	} 
 	
-	// Variável utilizada como controlador da geração de ID
+	// Variavel utilizada como controlador da geracao de ID
 	private static int idConta;	
-	// Função responsável por gerar ID's sem duplicação
+	
+	// Funcao responsavel por gerar ID's sem duplicacao
 	public static int geraIdConta () {		
 		return ++idConta;		
+	}
+	
+	public static boolean autenticarGarcom (String nome, int idmesa) throws Exception {
+		Mesa m = restaurante.localizarMesaPorID(idmesa);
+		if (m.getGarcom().getApelido().equalsIgnoreCase(nome))
+			return true;
+		throw new Exception("Garcom n�o serve essa mesa!");
 	}
 }

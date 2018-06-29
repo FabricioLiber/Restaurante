@@ -71,8 +71,6 @@ public class TelaListagemMesa extends JFrame {
 				}
 			}
 		});
-		btnListar.setBounds(224, 180, 115, 23);
-		contentPane.add(btnListar);
 		
 		textArea = new JTextArea();		
 		JScrollPane scroll = new JScrollPane(textArea);

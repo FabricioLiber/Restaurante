@@ -4,7 +4,6 @@
  */
 package application;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -22,8 +21,10 @@ public class TelaSolicitarProduto extends JFrame {
 	private JPanel contentPane;
 	private JLabel lblId;
 	private JLabel lblNome;
+	private JLabel lblGarcom;
 	private JTextField textField;
 	private JTextField textField_1;
+	private JTextField textField_2;
 	private JButton btnInserir;
 	private DefaultListModel<String> model = new DefaultListModel<String>();	
 	private JLabel lblmsg;
@@ -64,15 +65,21 @@ public class TelaSolicitarProduto extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		
+		lblGarcom = new JLabel("Garcom Responsavel");
+		lblGarcom.setBounds(19, 28, 130, 14);
+		contentPane.add(this.lblGarcom);
 		lblId = new JLabel("Id Mesa");
 		lblId.setBounds(19, 56, 102, 14);
 		contentPane.add(this.lblId);
 		lblNome = new JLabel("Nome do Produto");
-		lblNome.setBounds(19, 28, 102, 14);
+		lblNome.setBounds(19, 84, 102, 14);
 		contentPane.add(this.lblNome);
+		textField_2 = new JTextField();
+		textField_2.setBounds(150, 25, 86, 20);
+		contentPane.add(this.textField_2);
+		textField_2.setColumns(10);
 		textField = new JTextField();
-		textField.setBounds(124, 25, 86, 20);
+		textField.setBounds(124, 81, 86, 20);
 		contentPane.add(this.textField);
 		textField.setColumns(10);
 		textField_1 = new JTextField();
@@ -83,32 +90,35 @@ public class TelaSolicitarProduto extends JFrame {
 		btnInserir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
+					String garcomApelido = textField_2.getText();
 					String nome = textField.getText();
 					int id = Integer.parseInt(textField_1.getText());
-					Facade.solicitarProduto(id, nome);
-					lblmsg.setText("produto inserido ");
+					if (Facade.autenticarGarcom(garcomApelido, id)) {
+						Facade.solicitarProduto(id, nome);
+						lblmsg.setText("produto inserido ");
+					}
 				} catch (NumberFormatException e) {
 					lblmsg.setText("campo id deve ser numerico");
 				} catch (Exception e) {
 					lblmsg.setText(e.getMessage());
-					e.printStackTrace();
 				}
 			}
 		});
-		btnInserir.setBounds(19, 101, 136, 23);
+		btnInserir.setBounds(19, 125, 136, 23);
 		contentPane.add(this.btnInserir);
 		lblmsg = new JLabel("");
-		lblmsg.setBounds(19, 164, 294, 14);
+		lblmsg.setBounds(19, 164, 310, 14);
 		contentPane.add(this.lblmsg);
 		btnLimpar = new JButton("Limpar");
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				textField.setText("");
 				textField_1.setText("");
+				textField_2.setText("");
 				textField.requestFocus();
 			}
 		});
-		btnLimpar.setBounds(172, 101, 141, 23);
+		btnLimpar.setBounds(172, 125, 141, 23);
 		contentPane.add(this.btnLimpar);
 
 	}

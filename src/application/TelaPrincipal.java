@@ -78,17 +78,17 @@ public class TelaPrincipal {
 					p = Facade.cadastrarProduto("oleo", 10.0);
 					Facade.criarMesas(20);
 					Garcom g;					
-					g = Facade.cadastrarGarcom("Fabrício", 1, 5);
+					g = Facade.cadastrarGarcom("Fabricio", 1, 5);
 					g = Facade.cadastrarGarcom("Monitora", 6, 10);
 					g = Facade.cadastrarGarcom("Rafael", 11, 15);
-					//g = Facade.cadastrarGarcom("Builder", 16, 20);
+					g = Facade.cadastrarGarcom("Builder", 16, 20);
 				}catch(Exception e){
 					System.out.println(e.getMessage());
 				}
 			}
 			@Override
 			public void windowClosing(WindowEvent e) {
-				JOptionPane.showMessageDialog(null, "até breve !");
+				JOptionPane.showMessageDialog(frmPrincipal, "até breve !");
 			}
 		});
 

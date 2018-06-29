@@ -22,8 +22,10 @@ public class TelaTransferirConta extends JFrame {
 	private JPanel contentPane;
 	private JLabel lblIdOrigem;
 	private JLabel lblIdDestino;
+	private JLabel lblGarcom;
 	private JTextField textField;
 	private JTextField textField_1;
+	private JTextField textField_2;
 	private JButton btnInserir;
 	private DefaultListModel<String> model = new DefaultListModel<String>();	
 	private JLabel lblmsg;
@@ -64,51 +66,62 @@ public class TelaTransferirConta extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		textField_2 = new JTextField();
+		textField_2.setBounds(150, 25, 86, 20);
+		contentPane.add(this.textField_2);
+		textField_2.setColumns(10);
+
+		lblGarcom = new JLabel("Garcom Responsavel");
+		lblGarcom.setBounds(19, 28, 130, 14);
+		contentPane.add(this.lblGarcom);
 		
 		lblIdDestino = new JLabel("Id Mesa de Destino");
-		lblIdDestino.setBounds(19, 56, 120, 14);
+		lblIdDestino.setBounds(19, 84, 120, 14);
 		contentPane.add(this.lblIdDestino);
 		lblIdOrigem = new JLabel("Id Mesa de Origem");
-		lblIdOrigem.setBounds(19, 28, 120, 14);
+		lblIdOrigem.setBounds(19, 56, 120, 14);
 		contentPane.add(this.lblIdOrigem);
 		textField = new JTextField();
-		textField.setBounds(130, 25, 50, 20);
+		textField.setBounds(130, 53, 50, 20);
 		contentPane.add(this.textField);
 		textField.setColumns(10);
 		textField_1 = new JTextField();
-		textField_1.setBounds(130, 53, 50, 20);
+		textField_1.setBounds(130, 81, 50, 20);
 		contentPane.add(this.textField_1);
 		textField_1.setColumns(10);
 		btnInserir = new JButton("Inserir");
 		btnInserir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
+					String garcomApelido = textField_2.getText();
 					int idOrigem = Integer.parseInt(textField.getText());
-					int idDestino = Integer.parseInt(textField_1.getText());
-					Facade.transferirConta(idOrigem, idDestino);					
-					lblmsg.setText("Conta da Mesa"+ idOrigem +" transferida para Conta da Mesa "+ idDestino);
+					if (Facade.autenticarGarcom(garcomApelido, idOrigem)) {
+						int idDestino = Integer.parseInt(textField_1.getText());
+						Facade.transferirConta(idOrigem, idDestino);					
+						lblmsg.setText("Conta da Mesa"+ idOrigem +" transferida para Conta da Mesa "+ idDestino);
+					}
 				} catch (NumberFormatException e) {
 					lblmsg.setText("campo id deve ser numerico");
 				} catch (Exception e) {
 					lblmsg.setText(e.getMessage());
-					e.printStackTrace();
 				}
 			}
 		});
-		btnInserir.setBounds(19, 101, 136, 23);
+		btnInserir.setBounds(19, 130, 136, 23);
 		contentPane.add(this.btnInserir);
 		lblmsg = new JLabel("");
-		lblmsg.setBounds(19, 164, 294, 14);
+		lblmsg.setBounds(19, 164, 310, 14);
 		contentPane.add(this.lblmsg);
 		btnLimpar = new JButton("Limpar");
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				textField.setText("");
 				textField_1.setText("");
+				textField_2.setText("");
 				textField.requestFocus();
 			}
 		});
-		btnLimpar.setBounds(172, 101, 141, 23);
+		btnLimpar.setBounds(172, 130, 141, 23);
 		contentPane.add(this.btnLimpar);
 
 	}
