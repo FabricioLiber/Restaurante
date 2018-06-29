@@ -1,3 +1,7 @@
+/**IFPB - Curso SI - Disciplina de POO
+ * @author Fabrício Liberato
+ */
+
 package application;
 
 import java.awt.Graphics;

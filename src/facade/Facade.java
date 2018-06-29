@@ -1,3 +1,7 @@
+/**IFPB - Curso SI - Disciplina de POO
+ * @author Fabr�cio Liberato
+ */
+
 package facade;
 
 import java.text.SimpleDateFormat;
@@ -56,7 +60,7 @@ public class Facade {
 		if (qtd <= 0)
 			throw new Exception("Valor negativo para quantidade de Mesas invalido!");
 		for (int i = 1; i <= qtd; ++i)
-			restaurante.adicionar(new Mesa(i));
+			restaurante.adicionar(new Mesa(geraIdMesa()));
 	}
 	
 	// Método responsável por cadastrar o produto 
@@ -192,10 +196,13 @@ public class Facade {
 		int totalGorjeta = 0;
 		Garcom g = restaurante.localizarGarcom(apelido);
 		if (g != null) {
-			for (Mesa m : g.getMesas())
-				for (Conta c : m.getContas())
-					if (c.getDtfechamento().equals(dataFechamento))
-						totalGorjeta += c.getTotal();
+			for (Mesa m : g.getMesas()) {
+				if (!m.getContas().isEmpty())					
+					for (Conta c : m.getContas())
+						if (c.getDtfechamento() != null)
+							if (c.getDtfechamento().equals(dataFechamento))
+								totalGorjeta += c.getTotal();				
+			}
 			return totalGorjeta * 0.10;
 		} else
 			throw new Exception("Garcom nao encontrado!");
@@ -205,10 +212,14 @@ public class Facade {
 	
 	// Variavel utilizada como controlador da geracao de ID
 	private static int idConta;	
+	private static int idMesa;
 	
 	// Funcao responsavel por gerar ID's sem duplicacao
 	public static int geraIdConta () {		
 		return ++idConta;		
+	}
+	public static int geraIdMesa () {		
+		return ++idMesa;		
 	}
 	
 	public static boolean autenticarGarcom (String nome, int idmesa) throws Exception {

@@ -1,3 +1,6 @@
+/**IFPB - Curso SI - Disciplina de POO
+ * @author Fabrício Liberato
+ */
 package application;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,7 +47,7 @@ public class TelaCadastroGarcom extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaCadastroGarcom() {
-		setTitle("Cadastrar Produto");
+		setTitle("Cadastrar Garcom");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 400, 200);

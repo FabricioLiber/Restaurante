@@ -49,7 +49,7 @@ public class TelaCancelarConta extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaCancelarConta() {
-		setTitle("Fechar Conta");
+		setTitle("Cancelar Conta");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 340, 160);

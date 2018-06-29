@@ -1,9 +1,7 @@
 package application;
-/**********************************
- * IFPB - Curso Superior de Tec. em Sist. para Internet
- * Programação Orientada a Objetos
- * Prof. Fausto Maranhão Ayres
- **********************************/
+/**IFPB - Curso SI - Disciplina de POO
+ * @author Fabrício Liberato
+ */
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

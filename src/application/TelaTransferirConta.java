@@ -4,7 +4,6 @@
  */
 package application;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -58,7 +57,7 @@ public class TelaTransferirConta extends JFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		setTitle("Inserir Produto na Prateleira");
+		setTitle("Transferir conta");
 		setBounds(100, 100, 345, 229);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		contentPane = new JPanel();

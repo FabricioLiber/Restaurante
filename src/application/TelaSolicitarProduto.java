@@ -1,6 +1,6 @@
 
 /**IFPB - Curso SI - Disciplina de PERSISTENCIA DE OBJETOS
- * @author Prof Fausto Ayres
+ * @author Fabrício Liberato
  */
 package application;
 
@@ -57,7 +57,7 @@ public class TelaSolicitarProduto extends JFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		setTitle("Inserir Produto na Prateleira");
+		setTitle("Solicitar produto");
 		setBounds(100, 100, 345, 229);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		contentPane = new JPanel();

@@ -37,7 +37,7 @@ public class TelaPrincipal {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
+				try {	
 					TelaPrincipal window = new TelaPrincipal();
 					window.frmPrincipal.setVisible(true);
 				} catch (Exception e) {
@@ -61,7 +61,7 @@ public class TelaPrincipal {
 		frmPrincipal = new JFrame();
 		frmPrincipal.setTitle("Restaurante");
 		try {
-			frmPrincipal.setContentPane(new FundoTela("imagem1.jpg"));
+			frmPrincipal.setContentPane(new FundoTela("japones.png"));
 		} catch (IOException e1) {
 		}	
 
@@ -71,11 +71,14 @@ public class TelaPrincipal {
 				try{
 					//  pre-cadastro
 					Produto p;
-					p = Facade.cadastrarProduto("arroz", 3.0);
-					p = Facade.cadastrarProduto("feijao", 5.0);
-					p = Facade.cadastrarProduto("leite", 2.0);
-					p = Facade.cadastrarProduto("carne", 30.0);
-					p = Facade.cadastrarProduto("oleo", 10.0);
+					p = Facade.cadastrarProduto("temaki", 12.0);
+					p = Facade.cadastrarProduto("sushi", 26.0);
+					p = Facade.cadastrarProduto("sashimi", 22.0);
+					p = Facade.cadastrarProduto("coca-cola", 12.0);
+					p = Facade.cadastrarProduto("suco", 10.0);
+					p = Facade.cadastrarProduto("nigiri", 21.0);
+					p = Facade.cadastrarProduto("yakisoba", 10.0);
+					p = Facade.cadastrarProduto("chop suey", 10.0);
 					Facade.criarMesas(20);
 					Garcom g;					
 					g = Facade.cadastrarGarcom("Fabricio", 1, 5);
