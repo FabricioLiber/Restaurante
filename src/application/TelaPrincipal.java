@@ -81,7 +81,7 @@ public class TelaPrincipal {
 					g = Facade.cadastrarGarcom("Fabrício", 1, 5);
 					g = Facade.cadastrarGarcom("Monitora", 6, 10);
 					g = Facade.cadastrarGarcom("Rafael", 11, 15);
-					g = Facade.cadastrarGarcom("Builder", 16, 20);
+					//g = Facade.cadastrarGarcom("Builder", 16, 20);
 				}catch(Exception e){
 					System.out.println(e.getMessage());
 				}
@@ -180,6 +180,15 @@ public class TelaPrincipal {
 		});
 		mnConta.add(mntmListarContas);
 		
+		JMenuItem mntmFecharConta = new JMenuItem("Fechar");
+		mntmFecharConta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaFecharConta j = new TelaFecharConta();
+				j.setVisible(true);
+			}
+		});
+		mnConta.add(mntmFecharConta);
+		
 		JMenuItem mntmCancelarConta = new JMenuItem("Cancelar");
 		mntmCancelarConta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -188,6 +197,36 @@ public class TelaPrincipal {
 			}
 		});
 		mnConta.add(mntmCancelarConta);
+		
+		JMenu mnGarcom = new JMenu("Garçom");
+		menuBar.add(mnGarcom);
+
+		JMenuItem mntmCadastroGarcom = new JMenuItem("Criar");
+		mntmCadastroGarcom.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaCadastroGarcom j = new TelaCadastroGarcom();
+				j.setVisible(true);
+			}
+		});
+		mnGarcom.add(mntmCadastroGarcom);
+		
+		JMenuItem mntmListarGarcons = new JMenuItem("Listar");
+		mntmListarGarcons.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaListagemGarcom j = new TelaListagemGarcom();
+				j.setVisible(true);
+			}
+		});
+		mnGarcom.add(mntmListarGarcons);
+		
+		JMenuItem mntmCalcularGorjeta = new JMenuItem("Calcular Gorjeta");
+		mntmCalcularGorjeta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaCalcularGorjeta j = new TelaCalcularGorjeta();
+				j.setVisible(true);
+			}
+		});
+		mnGarcom.add(mntmCalcularGorjeta);
 		
 		JMenu mnConsulta = new JMenu("Consulta");
 		mnConsulta.addMouseListener(new MouseAdapter() {

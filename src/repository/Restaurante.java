@@ -85,7 +85,7 @@ public class Restaurante {
 		this.contas.remove(c);
 	}
 	
-	// Método responsável por encontrar mesa por ID
+	// Metodo responsavel por encontrar mesa por ID
 	public Mesa localizarMesaPorID (int id) {
 		for (int i = 0; i < this.getMesas().size(); i++) {
 			if (this.getMesas().get(i).getId() == id)
@@ -98,10 +98,9 @@ public class Restaurante {
 		ArrayList<Produto> produtos = new ArrayList<>();
 		if (nome.isEmpty())
 			return this.getProdutos();
-		else
-			for (Produto p : this.getProdutos())
-				if (nome.contains(p.getNome()))
-					produtos.add(p);
+		for (Produto p : this.getProdutos())
+			if (p.getNome().contains(nome))
+				produtos.add(p);
 		return produtos;	
 	}
 	
@@ -126,7 +125,7 @@ public class Restaurante {
 	
 	public Garcom localizarGarcom (String apelido) {
 		for (Garcom g : this.getGarcons())
-			if (apelido.equals(g.getApelido()))
+			if (apelido.equalsIgnoreCase(g.getApelido()))
 				return g;
 		return null;			
 	}

@@ -19,11 +19,11 @@ public class Facade {
 	 ou  apenas  os  produtos  que  contém  parte  do  nome  fornecido.
 	 */
 	public static ArrayList<Produto> listarProdutos (String nome) throws Exception {
-		ArrayList<Produto> produtos = restaurante.localizarProdutosPorNome(nome);
-		if (produtos.isEmpty() && nome.isEmpty())
+		if (restaurante.getProdutos().isEmpty())
 			throw new Exception("Nenhum produto cadastrado!");
-		else if (produtos.isEmpty() && !nome.isEmpty())
-			throw new Exception("Nenhum produto encontrado com essa combinação de caracteres ("+ nome+")!");
+		ArrayList<Produto> produtos = restaurante.localizarProdutosPorNome(nome);
+		if (produtos.isEmpty())
+			throw new Exception("Nenhum produto encontrado com essa combinacao de caracteres (\""+ nome+"\")!");
 		else
 			return produtos;	
 	}
@@ -67,7 +67,7 @@ public class Facade {
 		if (p != null)
 			throw new Exception("Produto ja cadastrado!");
 		if (nome.isEmpty() || preco <= 0)
-			throw new Exception("Informações de cadastro de produto invalidas!");
+			throw new Exception("Informacoes de cadastro de produto invalidas!");
 		p = new Produto(nome, preco);
 		restaurante.adicionar(p);
 		return p;			
@@ -84,7 +84,9 @@ public class Facade {
 			for (int i = mesainicial; i <= mesafinal; i++) {
 				Mesa m = restaurante.localizarMesaPorID(i);
 				if (m == null)
-					throw new Exception("Número de mesa não encontrado!");
+					throw new Exception("Numero de mesa nao encontrado!");
+				else if (m.getGarcom() != null)
+					throw new Exception("Mesa j� possui gar�om cadastrado!");
 				mesas.add(m);
 			}
 			for (Mesa m : mesas)
@@ -92,7 +94,7 @@ public class Facade {
 			restaurante.adicionar(g);
 			return g;
 		} else
-			throw new Exception("É necessário informar o intervalo referente a 5 mesas!");
+			throw new Exception("E necessario informar o intervalo referente a 5 mesas!");
 	}
 	
 	// Método responsável por criar  uma  conta  para  a  mesa   
@@ -187,8 +189,7 @@ public class Facade {
 	
 	// Método que calcula a gorjeta do garçom
 	public static double calcularGorjeta (String apelido) throws Exception {
-		SimpleDateFormat df;
-		df = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		String dataFechamento = df.format(new Date());
 		int totalGorjeta = 0;
 		Garcom g = restaurante.localizarGarcom(apelido);
@@ -199,7 +200,7 @@ public class Facade {
 						totalGorjeta += c.getTotal();
 			return totalGorjeta * 0.10;
 		} else
-			throw new Exception("Garçom não encontrado!");
+			throw new Exception("Garcom nao encontrado!");
 			
 		
 	} 
