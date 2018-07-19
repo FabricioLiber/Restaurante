@@ -1,8 +1,8 @@
 package application;
 /**********************************
  * IFPB - Curso Superior de Tec. em Sist. para Internet
- * Programação Orientada a Objetos
- * Prof. Fausto Maranhão Ayres
+ * Programaï¿½ï¿½o Orientada a Objetos
+ * Prof. Fausto Maranhï¿½o Ayres
  **********************************/
 
 import java.awt.EventQueue;
@@ -91,7 +91,7 @@ public class TelaPrincipal {
 			}
 			@Override
 			public void windowClosing(WindowEvent e) {
-				JOptionPane.showMessageDialog(frmPrincipal, "até breve !");
+				JOptionPane.showMessageDialog(frmPrincipal, "ate breve !");
 			}
 		});
 
@@ -201,7 +201,7 @@ public class TelaPrincipal {
 		});
 		mnConta.add(mntmCancelarConta);
 		
-		JMenu mnGarcom = new JMenu("Garçom");
+		JMenu mnGarcom = new JMenu("Garcom");
 		menuBar.add(mnGarcom);
 
 		JMenuItem mntmCadastroGarcom = new JMenuItem("Criar");
