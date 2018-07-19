@@ -1,7 +1,6 @@
 /**IFPB - Curso SI - Disciplina de POO
- * @author Fabrício Liberato
+ * @author Fabricio Liberato
  */
-
 package application;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -57,7 +56,7 @@ public class TelaListagemGarcom extends JFrame {
 					ArrayList<Garcom> lista2 = Facade.listarGarcons();
 					String texto = "Listagem de Garcons: \n";
 					if (lista2.isEmpty())
-						texto += "não tem garcons cadastrados\n";
+						texto += "nï¿½o tem garcons cadastrados\n";
 					else 
 						for(Garcom g: lista2) 
 							texto +=  g + "\n"; 

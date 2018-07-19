@@ -1,7 +1,7 @@
-package application;
 /**IFPB - Curso SI - Disciplina de POO
- * @author Fabrício Liberato
+ * @author Fabricio Liberato
  */
+package application;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -73,7 +73,7 @@ public class TelaCalcularGorjeta extends JFrame {
 					String dataFechamento = df.format(new Date());
 					String apelido = textField.getText();
 					double gorjeta = Facade.calcularGorjeta(apelido);
-					lblmsg.setText("Valor total da gorjeta em "+ dataFechamento + " é de R$ " + gorjeta);					
+					lblmsg.setText("Valor total da gorjeta em "+ dataFechamento + " ï¿½ de R$ " + gorjeta);					
 					textField.setText("");
 					textField.requestFocus();
 				}

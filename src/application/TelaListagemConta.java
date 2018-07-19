@@ -1,3 +1,6 @@
+/**IFPB - Curso SI - Disciplina de POO
+ * @author Fabricio Liberato
+ */
 package application;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -54,7 +57,7 @@ public class TelaListagemConta extends JFrame {
 					ArrayList<Conta> lista2 = Facade.listarContas();
 					String texto = "Listagem de Contas: \n";
 					if (lista2.isEmpty())
-						texto += "não tem contas criadas\n";
+						texto += "nï¿½o tem contas criadas\n";
 					else 
 						for(Conta c: lista2) 
 							texto +=  c + "\n"; 

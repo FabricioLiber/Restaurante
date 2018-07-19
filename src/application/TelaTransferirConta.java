@@ -1,9 +1,7 @@
-
-/**IFPB - Curso SI - Disciplina de PERSISTENCIA DE OBJETOS
- * @author Prof Fausto Ayres
+/**IFPB - Curso SI - Disciplina de POO
+ * @author Fabricio Liberato
  */
 package application;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

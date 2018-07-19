@@ -1,7 +1,7 @@
-package application;
 /**IFPB - Curso SI - Disciplina de POO
- * @author Fabrício Liberato
+ * @author Fabricio Liberato
  */
+package application;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -70,7 +70,7 @@ public class TelaListagemProduto extends JFrame {
 					ArrayList<Produto> lista1 = Facade.listarProdutos("");
 					texto = "Listagem de produtos: \n";
 					if (lista1.isEmpty())
-						texto += "não tem produto cadastrado\n";
+						texto += "nï¿½o tem produto cadastrado\n";
 					else 	
 						for(Produto p: lista1) 
 							texto +=  p + "\n"; 

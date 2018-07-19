@@ -1,10 +1,7 @@
+/**IFPB - Curso SI - Disciplina de POO
+ * @author Fabricio Liberato
+ */
 package application;
-/**********************************
- * IFPB - Curso Superior de Tec. em Sist. para Internet
- * Programa��o Orientada a Objetos
- * Prof. Fausto Maranh�o Ayres
- **********************************/
-
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -91,7 +88,7 @@ public class TelaPrincipal {
 			}
 			@Override
 			public void windowClosing(WindowEvent e) {
-				JOptionPane.showMessageDialog(frmPrincipal, "ate breve !");
+				JOptionPane.showMessageDialog(frmPrincipal, "at� breve !");
 			}
 		});
 
@@ -201,7 +198,7 @@ public class TelaPrincipal {
 		});
 		mnConta.add(mntmCancelarConta);
 		
-		JMenu mnGarcom = new JMenu("Garcom");
+		JMenu mnGarcom = new JMenu("Gar�om");
 		menuBar.add(mnGarcom);
 
 		JMenuItem mntmCadastroGarcom = new JMenuItem("Criar");

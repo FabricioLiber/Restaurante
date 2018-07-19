@@ -1,3 +1,6 @@
+/**IFPB - Curso SI - Disciplina de POO
+ * @author Fabricio Liberato
+ */
 package application;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -73,7 +76,7 @@ public class TelaConsulta extends JFrame {
 					lista1 = Facade.listarProdutos(pesquisa);
 					texto = "Listagem de produtos com a palavra ("+ pesquisa +"): \n";
 					if (lista1.isEmpty())
-						texto += "não tem\n";
+						texto += "nï¿½o tem\n";
 					else 	
 						for(Produto p: lista1) 
 							texto +=  p + "\n"; 

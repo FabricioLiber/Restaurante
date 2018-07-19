@@ -1,10 +1,7 @@
+/**IFPB - Curso SI - Disciplina de POO
+ * @author Fabricio Liberato
+ */
 package application;
-/**********************************
- * IFPB - Curso Superior de Tec. em Sist. para Internet
- * Programa��o Orientada a Objetos
- * Prof. Fausto Maranh�o Ayres
- **********************************/
-
 import java.util.ArrayList;
 
 import facade.Facade;

@@ -1,5 +1,5 @@
 /**IFPB - Curso SI - Disciplina de POO
- * @author FabrÌcio Liberato
+ * @author Fabricio Liberato
  */
 
 package facade;
@@ -11,6 +11,8 @@ import java.util.Date;
 import model.Conta;
 import model.Garcom;
 import model.Mesa;
+import model.Pagamento;
+import model.PagamentoDinheiro;
 import model.Produto;
 import repository.Restaurante;
 
@@ -88,7 +90,7 @@ public class Facade {
 				if (m == null)
 					throw new Exception("Numero de mesa nao encontrado!");
 				else if (m.getGarcom() != null)
-					throw new Exception("Mesa j· possui garÁom cadastrado!");
+					throw new Exception("Mesa ja possui garcom cadastrado!");
 				mesas.add(m);
 			}
 			for (Mesa m : mesas)
@@ -209,6 +211,21 @@ public class Facade {
 			
 		
 	} 
+	// Criar  pagamento  para  a  conta  da  mesa,  onde  tipo  pode  ser  ‚Äúdinheiro‚Äù  ou  ‚Äúcartao‚Äù.
+	public  static Pagamento pagarConta (int idmesa, String tipo, double percentual, String cart√£o, int quantidade) {
+		Pagamento p = new PagamentoDinheiro(2);
+		return p;
+	}
+	
+	// Exclui  o  gar√ßom  do  restaurante.   
+	public  static  void  excluirGarcom (String nome) {
+		
+	}
+	/* Retorna  o  percentual  m√©dio  aplicado  aos    pagamentos
+    em  dinheiro  das  contas  das  mesas  do  garcom.*/
+	public  static  double  calcularPercentualMedio (String apelido) {
+		return 0;
+	}
 	
 	// Variavel utilizada como controlador da geracao de ID
 	private static int idConta;	
@@ -226,6 +243,6 @@ public class Facade {
 		Mesa m = restaurante.localizarMesaPorID(idmesa);
 		if (m.getGarcom().getApelido().equalsIgnoreCase(nome))
 			return true;
-		throw new Exception("Garcom n„o serve essa mesa!");
+		throw new Exception("Garcom nao serve essa mesa!");
 	}
 }

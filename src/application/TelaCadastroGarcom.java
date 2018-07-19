@@ -1,5 +1,5 @@
 /**IFPB - Curso SI - Disciplina de POO
- * @author Fabrício Liberato
+ * @author Fabricio Liberato
  */
 package application;
 import java.awt.event.ActionEvent;

@@ -1,7 +1,7 @@
-package application;
 /**IFPB - Curso SI - Disciplina de POO
- * @author Fabrício Liberato
+ * @author Fabricio Liberato
  */
+package application;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -57,7 +57,7 @@ public class TelaListagemMesa extends JFrame {
 					ArrayList<Mesa> lista2 = Facade.listarMesas();
 					String texto = "Listagem de Mesas: \n";
 					if (lista2.isEmpty())
-						texto += "não tem mesas cadastradas\n";
+						texto += "nï¿½o tem mesas cadastradas\n";
 					else 
 						for(Mesa m: lista2) 
 							texto +=  m + "\n"; 
