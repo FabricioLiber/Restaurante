@@ -12,6 +12,7 @@ import model.Conta;
 import model.Garcom;
 import model.Mesa;
 import model.Pagamento;
+import model.PagamentoCartao;
 import model.PagamentoDinheiro;
 import model.Produto;
 import repository.Restaurante;
@@ -36,10 +37,13 @@ public class Facade {
 	
 	// Método que retorna  todos  os  garçons  do  restaurante.
 	public static ArrayList<Garcom> listarGarcons () throws Exception {
-		if (restaurante.getGarcons() != null)
-			return restaurante.getGarcons();
-		else
-			throw new Exception("Nenhuma Mesa cadastrada!");
+		ArrayList <Garcom> garcons = new ArrayList<>();
+		if (restaurante.getGarcons() != null) {
+			for (Garcom g : restaurante.getGarcons().values())
+				garcons.add(g);
+			return garcons;
+		} else
+			return null;
 	}
 	
 	// Método que retorna  todas  as  mesas  do  restaurante.
@@ -212,14 +216,29 @@ public class Facade {
 		
 	} 
 	// Criar  pagamento  para  a  conta  da  mesa,  onde  tipo  pode  ser  “dinheiro”  ou  “cartao”.
-	public  static Pagamento pagarConta (int idmesa, String tipo, double percentual, String cartão, int quantidade) {
-		Pagamento p = new PagamentoDinheiro(2);
+	public  static Pagamento pagarConta (int idmesa, String tipo, double percentual, String cartão, int quantidade) throws Exception {
+		Mesa m = restaurante.localizarMesaPorID(idmesa);
+		if (m == null)
+			throw new Exception ("Não existe conta na mesa!");
+		Pagamento p;
+		if (tipo.equalsIgnoreCase("Dinheiro")) {
+			p = new PagamentoDinheiro(2);
+		} else if (tipo.equalsIgnoreCase("Cartão")) {
+			p = new PagamentoCartao("2", 2);
+		} else
+			throw new Exception ("Forma de pagamento inválida!");
 		return p;
 	}
 	
 	// Exclui  o  garçom  do  restaurante.   
-	public  static  void  excluirGarcom (String nome) {
-		
+	public  static  void  excluirGarcom (String nome) throws Exception {
+		// TODO
+		Garcom g = restaurante.getGarcons().get(nome);
+		if (g == null)
+			throw new Exception("Garcom não localizado!");
+		for (Mesa m : g.getMesas())
+			m.setGarcom(null);
+		restaurante.remover(g);
 	}
 	/* Retorna  o  percentual  médio  aplicado  aos    pagamentos
     em  dinheiro  das  contas  das  mesas  do  garcom.*/
@@ -241,8 +260,13 @@ public class Facade {
 	
 	public static boolean autenticarGarcom (String nome, int idmesa) throws Exception {
 		Mesa m = restaurante.localizarMesaPorID(idmesa);
-		if (m.getGarcom().getApelido().equalsIgnoreCase(nome))
+		if (m == null)
+			throw new Exception("Mesa nao localizada!");
+		else if (m.getGarcom() == null)
+			throw new Exception("Mesa nao possui garcom responsavel!");
+		else if (m.getGarcom().getApelido().equalsIgnoreCase(nome))
 			return true;
-		throw new Exception("Garcom nao serve essa mesa!");
+		else
+			return false;
 	}
 }

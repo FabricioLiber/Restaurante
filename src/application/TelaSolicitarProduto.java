@@ -94,7 +94,8 @@ public class TelaSolicitarProduto extends JFrame {
 					if (Facade.autenticarGarcom(garcomApelido, id)) {
 						Facade.solicitarProduto(id, nome);
 						lblmsg.setText("produto inserido ");
-					}
+					} else
+						lblmsg.setText("Garcom não serve essa mesa!");
 				} catch (NumberFormatException e) {
 					lblmsg.setText("campo id deve ser numerico");
 				} catch (Exception e) {

@@ -1,5 +1,5 @@
 /**IFPB - Curso SI - Disciplina de POO
- * @author Fabrício Liberato
+ * @author Fabrï¿½cio Liberato
  */
 
 package model;
@@ -53,7 +53,7 @@ public class Mesa {
 		for (Conta c : this.contas)
 			contas += (c.getNumero() + " ");
 		if (this.garcom == null)
-			return "Mesa [id=" + id + ", ocupada=" + ocupada + ", contas= [" + contas +"] ]";
+			return "Mesa [id=" + id + ", ocupada=" + ocupada + ", contas= [" + contas +"], Sem garcom vinculado!]";
 		else
 			return "Mesa [id=" + id + ", ocupada=" + ocupada + ", contas=" + contas +", garcom="+ garcom.getApelido() + "]";
 	}

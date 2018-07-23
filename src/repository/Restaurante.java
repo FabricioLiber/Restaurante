@@ -1,6 +1,7 @@
 package repository;
 
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 import model.Conta;
 import model.Garcom;
@@ -12,13 +13,13 @@ public class Restaurante {
 	private ArrayList<Produto> produtos;
 	private ArrayList<Mesa> mesas;
 	private ArrayList<Conta> contas;
-	private ArrayList<Garcom> garcons;
+	private TreeMap<String, Garcom> garcons;
 	
 	public Restaurante () {
 		produtos = new ArrayList<>();
 		contas = new ArrayList<>();
 		mesas = new ArrayList<>();
-		garcons = new ArrayList<>();
+		garcons = new TreeMap<>();
 	}
 
 	public ArrayList<Produto> getProdutos() {
@@ -45,11 +46,11 @@ public class Restaurante {
 		this.contas = contas;
 	}
 
-	public ArrayList<Garcom> getGarcons() {
+	public TreeMap <String, Garcom> getGarcons() {
 		return garcons;
 	}
 
-	public void setGarcons(ArrayList<Garcom> garcons) {
+	public void setGarcons(TreeMap <String, Garcom> garcons) {
 		this.garcons = garcons;
 	}
 	
@@ -71,10 +72,10 @@ public class Restaurante {
 	
 	// Adicionar e remover garçom
 	public void adicionar (Garcom g) {
-		this.garcons.add(g);
+		this.garcons.put(g.getApelido(), g);
 	}
 	public void remover (Garcom g) {
-		this.garcons.remove(g);
+		this.garcons.remove(g.getApelido());
 	}
 	
 	// Adicionar e remover conta
@@ -124,7 +125,7 @@ public class Restaurante {
 	}
 	
 	public Garcom localizarGarcom (String apelido) {
-		for (Garcom g : this.getGarcons())
+		for (Garcom g : this.getGarcons().values())
 			if (apelido.equalsIgnoreCase(g.getApelido()))
 				return g;
 		return null;			

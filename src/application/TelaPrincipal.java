@@ -228,6 +228,15 @@ public class TelaPrincipal {
 		});
 		mnGarcom.add(mntmCalcularGorjeta);
 		
+		JMenuItem mntmExclusaoGarcom = new JMenuItem("Deletar");
+		mntmExclusaoGarcom.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaExclusaoGarcom j = new TelaExclusaoGarcom();
+				j.setVisible(true);
+			}
+		});
+		mnGarcom.add(mntmExclusaoGarcom);
+		
 		JMenu mnConsulta = new JMenu("Consulta");
 		mnConsulta.addMouseListener(new MouseAdapter() {
 			@Override
