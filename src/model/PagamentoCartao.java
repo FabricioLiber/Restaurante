@@ -24,7 +24,7 @@ public class PagamentoCartao extends Pagamento {
 	@Override
 	public void calcularPagamento(double totalconta) {
 		// TODO Auto-generated method stub
-		if (quantidadeparcelas > 0 && quantidadeparcelas < 3)
+		if (quantidadeparcelas > 0 && quantidadeparcelas <= 2)
 			this.setValorpago(totalconta);
 		else if (quantidadeparcelas == 3)
 			this.setValorpago(totalconta + (totalconta * 0.1));

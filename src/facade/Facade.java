@@ -141,7 +141,7 @@ public class Facade {
 			throw new Exception("Mesa nao localizada!");
 		Conta c = m.localizarContaEmAberto();
 		if (c == null)
-			c = criarConta(idmesa);
+			throw new Exception("Mesa nao possui conta em aberto!");
 		c.adicionar(p);
 	}
 	
@@ -216,17 +216,26 @@ public class Facade {
 		
 	} 
 	// Criar  pagamento  para  a  conta  da  mesa,  onde  tipo  pode  ser  “dinheiro”  ou  “cartao”.
-	public  static Pagamento pagarConta (int idmesa, String tipo, double percentual, String cartão, int quantidade) throws Exception {
+	public  static Pagamento pagarConta (int idmesa, String tipo, int percentual, String cartao, int quantidade) throws Exception {
+		if (quantidade < 0 || quantidade > 4)
+			throw new Exception ("Quantidade de parcelas inválida!");
 		Mesa m = restaurante.localizarMesaPorID(idmesa);
 		if (m == null)
-			throw new Exception ("Não existe conta na mesa!");
+			throw new Exception ("Nao existe a mesa indicada!");
+		Conta c = m.localizarUltimaConta();
+		if (c == null)
+			throw new Exception ("Nao existe conta a mesa indicada!");
+		if (c.getPagamento() != null)
+			throw new Exception ("Todas as contas da mesa "+ idmesa +" foram pagas!");
 		Pagamento p;
 		if (tipo.equalsIgnoreCase("Dinheiro")) {
-			p = new PagamentoDinheiro(2);
+			p = new PagamentoDinheiro(percentual);
 		} else if (tipo.equalsIgnoreCase("Cartão")) {
-			p = new PagamentoCartao("2", 2);
+			p = new PagamentoCartao(cartao, quantidade);
 		} else
 			throw new Exception ("Forma de pagamento inválida!");
+		p.calcularPagamento(c.getTotal());
+		c.setPagamento(p);
 		return p;
 	}
 	
@@ -242,7 +251,16 @@ public class Facade {
 	}
 	/* Retorna  o  percentual  médio  aplicado  aos    pagamentos
     em  dinheiro  das  contas  das  mesas  do  garcom.*/
-	public  static  double  calcularPercentualMedio (String apelido) {
+	public  static  double  calcularPercentualMedio (String apelido) throws Exception {
+		int quantidadePagamentoDinheiro = 0;
+		Garcom g = restaurante.localizarGarcom(apelido);
+		if (g == null)
+			throw new Exception("Garcom não localizado!");
+		for (Mesa m : g.getMesas())
+			for (Conta c : m.getContas())
+				if (c.getPagamento() instanceof PagamentoCartao)
+					quantidadePagamentoDinheiro ++;
+		System.out.println(quantidadePagamentoDinheiro);
 		return 0;
 	}
 	

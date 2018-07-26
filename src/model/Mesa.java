@@ -76,12 +76,6 @@ public class Mesa {
 		if (this.ocupada)
 			return this.localizarUltimaConta();
 		return null;
-		/*for (int i = 0; i < this.getContas().size(); i ++) {
-			if (this.getContas().get(i).getDtfechamento() == null)
-				return this.getContas().get(i);
-		}
-		return null;
-		*/
 	}
 	
 	public Conta localizarUltimaConta () {

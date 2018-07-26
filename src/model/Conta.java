@@ -1,5 +1,5 @@
 /**IFPB - Curso SI - Disciplina de POO
- * @author Fabrício Liberato
+ * @author Fabrï¿½cio Liberato
  */
 
 package model;
@@ -13,6 +13,7 @@ public class Conta {
 	private double total;
 	private Mesa mesa;
 	private ArrayList<Produto> produtos;
+	private Pagamento pagamento;
 	
 	public Conta(int numero, Mesa mesa) {
 		this.numero = numero;
@@ -58,6 +59,14 @@ public class Conta {
 		return total;
 	}
 	
+	public Pagamento getPagamento() {
+		return pagamento;
+	}
+
+	public void setPagamento(Pagamento pagamento) {
+		this.pagamento = pagamento;
+	}
+
 	public void adicionar (Produto p) {
 		this.produtos.add(p);
 		this.total += p.getPreco();

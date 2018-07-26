@@ -125,9 +125,6 @@ public class Restaurante {
 	}
 	
 	public Garcom localizarGarcom (String apelido) {
-		for (Garcom g : this.getGarcons().values())
-			if (apelido.equalsIgnoreCase(g.getApelido()))
-				return g;
-		return null;			
+		return this.getGarcons().get(apelido);		
 	}
 }
