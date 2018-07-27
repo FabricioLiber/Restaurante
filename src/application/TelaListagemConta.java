@@ -44,7 +44,7 @@ public class TelaListagemConta extends JFrame {
 		setTitle("Listar Contas");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 550, 242);		
+		setBounds(100, 100, 552, 241);		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

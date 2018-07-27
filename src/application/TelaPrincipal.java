@@ -88,7 +88,7 @@ public class TelaPrincipal {
 			}
 			@Override
 			public void windowClosing(WindowEvent e) {
-				JOptionPane.showMessageDialog(frmPrincipal, "at� breve !");
+				JOptionPane.showMessageDialog(frmPrincipal, "ate breve!");
 			}
 		});
 
@@ -198,7 +198,7 @@ public class TelaPrincipal {
 		});
 		mnConta.add(mntmCancelarConta);
 		
-		JMenu mnGarcom = new JMenu("Gar�om");
+		JMenu mnGarcom = new JMenu("Garcom");
 		menuBar.add(mnGarcom);
 
 		JMenuItem mntmCadastroGarcom = new JMenuItem("Criar");

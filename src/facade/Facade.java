@@ -66,7 +66,7 @@ public class Facade {
 		if (qtd <= 0)
 			throw new Exception("Valor negativo para quantidade de Mesas invalido!");
 		for (int i = 1; i <= qtd; ++i)
-			restaurante.adicionar(new Mesa(geraIdMesa()));
+			restaurante.adicionar(new Mesa(geraId("Mesa")));
 	}
 	
 	// Método responsável por cadastrar o produto 
@@ -112,7 +112,7 @@ public class Facade {
 		if (m == null)
 			throw new Exception("Mesa invalida!");
 		if (m.localizarContaEmAberto() == null) {
-			c = new Conta(geraIdConta(), m);	
+			c = new Conta(geraId("Conta"), m);	
 			restaurante.adicionar(c);
 			m.adicionar(c);
 			return c;
@@ -195,7 +195,7 @@ public class Facade {
 			throw new Exception("Mesa não possui conta em aberto!");
 	}
 	
-	// Método que calcula a gorjeta do garçom
+	// Metodo que calcula a gorjeta do garcom
 	public static double calcularGorjeta (String apelido) throws Exception {
 		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		String dataFechamento = df.format(new Date());
@@ -207,18 +207,18 @@ public class Facade {
 					for (Conta c : m.getContas())
 						if (c.getDtfechamento() != null)
 							if (c.getDtfechamento().equals(dataFechamento))
-								totalGorjeta += c.getTotal();				
+								totalGorjeta += c.getPagamento().calcularGorjeta();				
 			}
-			return totalGorjeta * 0.10;
+			return totalGorjeta;
 		} else
 			throw new Exception("Garcom nao encontrado!");
 			
 		
 	} 
-	// Criar  pagamento  para  a  conta  da  mesa,  onde  tipo  pode  ser  “dinheiro”  ou  “cartao”.
+	// Criar  pagamento  para  a  conta  da  mesa,  onde  tipo  pode  ser  dinheiro  ou  cartao.
 	public  static Pagamento pagarConta (int idmesa, String tipo, int percentual, String cartao, int quantidade) throws Exception {
 		if (quantidade < 0 || quantidade > 4)
-			throw new Exception ("Quantidade de parcelas inválida!");
+			throw new Exception ("Quantidade de parcelas invalida!");
 		Mesa m = restaurante.localizarMesaPorID(idmesa);
 		if (m == null)
 			throw new Exception ("Nao existe a mesa indicada!");
@@ -228,9 +228,9 @@ public class Facade {
 		if (c.getPagamento() != null)
 			throw new Exception ("Todas as contas da mesa "+ idmesa +" foram pagas!");
 		Pagamento p;
-		if (tipo.equalsIgnoreCase("Dinheiro")) {
+		if (tipo.equalsIgnoreCase("dinheiro")) {
 			p = new PagamentoDinheiro(percentual);
-		} else if (tipo.equalsIgnoreCase("Cartão")) {
+		} else if (tipo.equalsIgnoreCase("cartao")) {
 			p = new PagamentoCartao(cartao, quantidade);
 		} else
 			throw new Exception ("Forma de pagamento inválida!");
@@ -240,28 +240,32 @@ public class Facade {
 	}
 	
 	// Exclui  o  garçom  do  restaurante.   
-	public  static  void  excluirGarcom (String nome) throws Exception {
-		// TODO
+	public  static  void excluirGarcom (String nome) throws Exception {
 		Garcom g = restaurante.getGarcons().get(nome);
 		if (g == null)
-			throw new Exception("Garcom não localizado!");
+			throw new Exception("Garcom nao localizado!");
 		for (Mesa m : g.getMesas())
-			m.setGarcom(null);
+			if (m.localizarContaEmAberto() != null)
+				throw new Exception("Garcom possui mesa com conta em aberto");
+		for (Mesa m : g.getMesas())
+			m.setGarcom(null);		
 		restaurante.remover(g);
 	}
-	/* Retorna  o  percentual  médio  aplicado  aos    pagamentos
+	/* Retorna  o  percentual  medio  aplicado  aos    pagamentos
     em  dinheiro  das  contas  das  mesas  do  garcom.*/
 	public  static  double  calcularPercentualMedio (String apelido) throws Exception {
-		int quantidadePagamentoDinheiro = 0;
+		int quantidadeDescontoPagamentoDinheiro = 0, totalDescontoPagamentoDinheiro = 0;
 		Garcom g = restaurante.localizarGarcom(apelido);
 		if (g == null)
-			throw new Exception("Garcom não localizado!");
+			throw new Exception("Garcom nao localizado!");
 		for (Mesa m : g.getMesas())
 			for (Conta c : m.getContas())
-				if (c.getPagamento() instanceof PagamentoCartao)
-					quantidadePagamentoDinheiro ++;
-		System.out.println(quantidadePagamentoDinheiro);
-		return 0;
+				if (c.getPagamento() instanceof PagamentoDinheiro) {
+					PagamentoDinheiro p = (PagamentoDinheiro) c.getPagamento();
+					quantidadeDescontoPagamentoDinheiro ++;
+					totalDescontoPagamentoDinheiro += p.getPercentualdesconto();					
+				}
+		return totalDescontoPagamentoDinheiro / quantidadeDescontoPagamentoDinheiro;
 	}
 	
 	// Variavel utilizada como controlador da geracao de ID
@@ -269,11 +273,12 @@ public class Facade {
 	private static int idMesa;
 	
 	// Funcao responsavel por gerar ID's sem duplicacao
-	public static int geraIdConta () {		
-		return ++idConta;		
-	}
-	public static int geraIdMesa () {		
-		return ++idMesa;		
+	public static int geraId (String nomeClasse) {
+		if (nomeClasse.equals("Mesa"))
+			return ++idMesa;
+		else if (nomeClasse.equals("Conta"))
+			return ++idConta;
+		return 0;
 	}
 	
 	public static boolean autenticarGarcom (String nome, int idmesa) throws Exception {

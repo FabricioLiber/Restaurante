@@ -28,22 +28,6 @@ public class TelaCalcularGorjeta extends JFrame {
 	private JLabel lblmsg;
 
 	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					TelaCancelarConta frame = new TelaCancelarConta();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	/**
 	 * Create the frame.
 	 */
 	public TelaCalcularGorjeta() {
@@ -73,7 +57,7 @@ public class TelaCalcularGorjeta extends JFrame {
 					String dataFechamento = df.format(new Date());
 					String apelido = textField.getText();
 					double gorjeta = Facade.calcularGorjeta(apelido);
-					lblmsg.setText("Valor total da gorjeta em "+ dataFechamento + " � de R$ " + gorjeta);					
+					lblmsg.setText("Valor total da gorjeta ("+ dataFechamento + ") = R$ " + gorjeta);					
 					textField.setText("");
 					textField.requestFocus();
 				}
