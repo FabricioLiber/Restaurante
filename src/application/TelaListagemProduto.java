@@ -2,9 +2,14 @@
  * @author Fabricio Liberato
  */
 package application;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -14,12 +19,6 @@ import javax.swing.border.EmptyBorder;
 import facade.Facade;
 import model.Produto;
 import model.TableModel;
-import model.Teste;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class TelaListagemProduto extends JFrame {
 
@@ -30,7 +29,7 @@ public class TelaListagemProduto extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaListagemProduto() {
-		setTitle("Listar Produto");
+		setTitle("Listar Produtos");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 550, 400);
@@ -54,7 +53,6 @@ public class TelaListagemProduto extends JFrame {
 				dado = new String[2];
 				String [] colunas = {"Nome", "Preco"};
 				tableModel = new TableModel(lista1.size(), colunas);
-				System.out.println(lista1);
 				for (int i = 0; i < lista1.size(); i++) {
 					dado[0] = lista1.get(i).getNome();
 					dado[1] = String.valueOf(lista1.get(i).getPreco());

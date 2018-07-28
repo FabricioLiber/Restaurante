@@ -50,8 +50,7 @@ public class Facade {
 	public static ArrayList<Mesa> listarMesas () throws Exception {
 		if (restaurante.getMesas() != null)
 			return restaurante.getMesas();
-		else
-			throw new Exception("Nenhuma Mesa cadastrada!");
+		return null;
 	}
 	
 	// Metodo que retorna  todas  as  contas  do  restaurante.
