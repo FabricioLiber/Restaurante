@@ -2,92 +2,86 @@
  * @author Fabricio Liberato
  */
 package application;
-import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.ScrollPaneConstants;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 import facade.Facade;
 import model.Produto;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import model.TableModel;
+import model.Teste;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaListagemProduto extends JFrame {
 
 	private JPanel contentPane;
-	private JTextArea textArea;
-	private JButton btnListar;
-
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					TelaListagemProduto frame = new TelaListagemProduto();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
+	private JTable table;
+	private TableModel tableModel;
 	/**
 	 * Create the frame.
 	 */
 	public TelaListagemProduto() {
-		addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowOpened(WindowEvent arg0) {
-				btnListar.doClick();
-			}
-		});
 		setTitle("Listar Produto");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 550, 290);
+		setBounds(100, 100, 550, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
-		btnListar = new JButton("Listar");
-		btnListar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try{
-					String texto;
-					ArrayList<Produto> lista1 = Facade.listarProdutos("");
-					texto = "Listagem de produtos: \n";
-					if (lista1.isEmpty())
-						texto += "n�o tem produto cadastrado\n";
-					else 	
-						for(Produto p: lista1) 
-							texto +=  p + "\n"; 
-
-					textArea.setText(texto);
+		
+		JLabel label = new JLabel("");
+		label.setFont(new Font("Times New Roman", Font.PLAIN, 24));
+		label.setBounds(57, 21, 418, 33);
+		contentPane.add(label);
+		
+		try{
+			String [] dado = null;
+			ArrayList<Produto> lista1 = Facade.listarProdutos("");
+			if (lista1.isEmpty()) {
+				label.setText("Nenhum produto cadastrado!");
+			}
+			else {
+				dado = new String[2];
+				String [] colunas = {"Nome", "Preco"};
+				tableModel = new TableModel(lista1.size(), colunas);
+				System.out.println(lista1);
+				for (int i = 0; i < lista1.size(); i++) {
+					dado[0] = lista1.get(i).getNome();
+					dado[1] = String.valueOf(lista1.get(i).getPreco());
+					tableModel.addRow(dado);
 				}
-				catch(Exception erro){
-					JOptionPane.showMessageDialog(null,erro.getMessage());
-				}
+				label.setText("Listagem de produtos:");
+			}
+		}
+		catch(Exception erro){
+			JOptionPane.showMessageDialog(null,erro.getMessage());
+			erro.printStackTrace();
+		}
+
+		table = new JTable(tableModel);
+		table.setBounds(190, 383, 191, 250);
+		JScrollPane scroll = new JScrollPane(table);
+		scroll.setBounds(57, 73, 418, 208);
+		contentPane.add(scroll);
+		
+		JButton btnFecharListagem = new JButton("Fechar Listagem");
+		btnFecharListagem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
 			}
 		});
-		
-		textArea = new JTextArea();
-		JScrollPane scroll = new JScrollPane(textArea);
-		scroll.setBounds(24, 29, 510, 174);
-		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		contentPane.add(scroll);
+		btnFecharListagem.setBounds(310, 312, 165, 35);
+		btnFecharListagem.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		contentPane.add(btnFecharListagem);
 	}
 }

@@ -35,7 +35,7 @@ public class Facade {
 			return produtos;	
 	}
 	
-	// Método que retorna  todos  os  garçons  do  restaurante.
+	// Metodo que retorna  todos  os  garçons  do  restaurante.
 	public static ArrayList<Garcom> listarGarcons () throws Exception {
 		ArrayList <Garcom> garcons = new ArrayList<>();
 		if (restaurante.getGarcons() != null) {
@@ -45,8 +45,8 @@ public class Facade {
 		} else
 			return null;
 	}
-	
-	// Método que retorna  todas  as  mesas  do  restaurante.
+
+	// Metodo que retorna  todas  as  mesas  do  restaurante.
 	public static ArrayList<Mesa> listarMesas () throws Exception {
 		if (restaurante.getMesas() != null)
 			return restaurante.getMesas();
@@ -54,14 +54,14 @@ public class Facade {
 			throw new Exception("Nenhuma Mesa cadastrada!");
 	}
 	
-	// Método que retorna  todas  as  contas  do  restaurante.
+	// Metodo que retorna  todas  as  contas  do  restaurante.
 	public static ArrayList<Conta> listarContas () throws Exception {
 		if (restaurante.getContas().isEmpty())
 			throw new Exception("Nenhuma Conta cadastrada!");
 		return restaurante.getContas();			
 	}
 	
-	// Método responsável por criar todas as N mesas do restaurante  
+	// Metodo responsável por criar todas as N mesas do restaurante  
 	public static void criarMesas (int qtd) throws Exception {
 		if (qtd <= 0)
 			throw new Exception("Valor negativo para quantidade de Mesas invalido!");
@@ -69,7 +69,7 @@ public class Facade {
 			restaurante.adicionar(new Mesa(geraId("Mesa")));
 	}
 	
-	// Método responsável por cadastrar o produto 
+	// Metodo responsável por cadastrar o produto 
 	public static Produto cadastrarProduto (String nome, double preco) throws Exception {
 		Produto p = restaurante.localizarProdutoPorNome(nome);
 		if (p != null)
@@ -81,7 +81,7 @@ public class Facade {
 		return p;			
 	}
 	
-	// Método responsável por cadastrar garçom
+	// Metodo responsavel por cadastrar garçom
 	public static Garcom cadastrarGarcom (String nome, int mesainicial, int mesafinal) throws Exception {
 		Garcom g = restaurante.localizarGarcom(nome);
 		if (g != null)
@@ -105,7 +105,7 @@ public class Facade {
 			throw new Exception("E necessario informar o intervalo referente a 5 mesas!");
 	}
 	
-	// Método responsável por criar  uma  conta  para  a  mesa   
+	// Metodo responsavel por criar  uma  conta  para  a  mesa   
 	public static Conta criarConta (int idmesa) throws Exception {
 		Mesa m = restaurante.localizarMesaPorID(idmesa);
 		Conta c;
@@ -121,7 +121,7 @@ public class Facade {
 			throw new Exception("Mesa ja esta ocupada!");
 	}
 	
-	// Método utilizado para retornar a conta da mesa 
+	// Metodo utilizado para retornar a conta da mesa 
 	public static Conta consultarConta (int idmesa) throws Exception {
 		Mesa m = restaurante.localizarMesaPorID(idmesa);
 		Conta c = m.localizarUltimaConta();
@@ -131,7 +131,7 @@ public class Facade {
 			throw new Exception("Não existe conta na mesa indicada!");
 	}
 	
-	// Método que adiciona um produto na  conta
+	// Metodo que adiciona um produto na  conta
 	public static void solicitarProduto (int idmesa, String nomeproduto) throws Exception {
 		Produto p = restaurante.localizarProdutoPorNome(nomeproduto);
 		Mesa m = restaurante.localizarMesaPorID(idmesa);
@@ -145,7 +145,7 @@ public class Facade {
 		c.adicionar(p);
 	}
 	
-	// Método que exclui a conta da mesa e do restaurante
+	// Metodo que exclui a conta da mesa e do restaurante
 	public static void cancelarConta (int idmesa) throws Exception {
 		Mesa m = restaurante.localizarMesaPorID(idmesa);
 		Conta c = m.localizarContaEmAberto();
@@ -157,7 +157,7 @@ public class Facade {
 			throw new Exception("Mesa não possui conta em aberto!");
 	}
 	
-	/* Método que transfere todos os produtos da conta de
+	/* Metodo que transfere todos os produtos da conta de
 	origem para a conta destino e cancela a conta origem. 
 	*/
 	public static void transferirConta (int idmesaorigem, int idmesadestino) throws Exception {
@@ -180,7 +180,7 @@ public class Facade {
 			throw new Exception("Não e possivel transferir para mesa de outro Garcom!");
 	}
 	
-	// Método que atualiza  a  data  de  fechamento  da  conta (Atualizar total)
+	// Metodo que atualiza  a  data  de  fechamento  da  conta (Atualizar total)
 	public static void fecharConta (int idmesa) throws Exception {
 		Mesa m = restaurante.localizarMesaPorID(idmesa);
 		Conta c = m.localizarContaEmAberto();

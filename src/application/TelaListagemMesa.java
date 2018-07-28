@@ -57,7 +57,7 @@ public class TelaListagemMesa extends JFrame {
 					ArrayList<Mesa> lista2 = Facade.listarMesas();
 					String texto = "Listagem de Mesas: \n";
 					if (lista2.isEmpty())
-						texto += "n�o tem mesas cadastradas\n";
+						texto += "nao tem mesas cadastradas\n";
 					else 
 						for(Mesa m: lista2) 
 							texto +=  m + "\n"; 
