@@ -44,18 +44,18 @@ public class TelaListagemProduto extends JFrame {
 		contentPane.add(label);
 		
 		try{
-			String [] dado = null;
+			Object [] dado = null;
 			ArrayList<Produto> lista1 = Facade.listarProdutos("");
-			if (lista1.isEmpty()) {
+			if (lista1 == null) {
 				label.setText("Nenhum produto cadastrado!");
 			}
 			else {
-				dado = new String[2];
+				dado = new Object[2];
 				String [] colunas = {"Nome", "Preco"};
 				tableModel = new TableModel(lista1.size(), colunas);
 				for (int i = 0; i < lista1.size(); i++) {
 					dado[0] = lista1.get(i).getNome();
-					dado[1] = String.valueOf(lista1.get(i).getPreco());
+					dado[1] = lista1.get(i).getPreco();
 					tableModel.addRow(dado);
 				}
 				label.setText("Listagem de produtos:");

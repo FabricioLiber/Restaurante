@@ -27,7 +27,7 @@ public class Facade {
 	 */
 	public static ArrayList<Produto> listarProdutos (String nome) throws Exception {
 		if (restaurante.getProdutos().isEmpty())
-			throw new Exception("Nenhum produto cadastrado!");
+			return null;
 		ArrayList<Produto> produtos = restaurante.localizarProdutosPorNome(nome);
 		if (produtos.isEmpty())
 			throw new Exception("Nenhum produto encontrado com essa combinacao de caracteres (\""+ nome+"\")!");
@@ -56,7 +56,7 @@ public class Facade {
 	// Metodo que retorna  todas  as  contas  do  restaurante.
 	public static ArrayList<Conta> listarContas () throws Exception {
 		if (restaurante.getContas().isEmpty())
-			throw new Exception("Nenhuma Conta cadastrada!");
+			return null;
 		return restaurante.getContas();			
 	}
 	

@@ -2,78 +2,89 @@
  * @author Fabricio Liberato
  */
 package application;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.ScrollPaneConstants;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 import facade.Facade;
 import model.Garcom;
+import model.Mesa;
+import model.TableModel;
 
 public class TelaListagemGarcom extends JFrame {
 
 	private JPanel contentPane;
-	private JTextArea textArea;
-	private JButton btnListar;
-
-	/**
-	 * Launch the application.
-	 */
-
+	private JTable table;
+	private TableModel tableModel;
 	/**
 	 * Create the frame.
 	 */
 	public TelaListagemGarcom() {
-		addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowOpened(WindowEvent e) {
-				btnListar.doClick();
-			}
-		});
-		setTitle("Listar Garcons");
+		setTitle("Listar Contas");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 550, 242);		
+		setBounds(100, 100, 550, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
-		btnListar = new JButton("Listar");
-		btnListar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try{
-					ArrayList<Garcom> lista2 = Facade.listarGarcons();
-					String texto = "Listagem de Garcons: \n";
-					if (lista2.isEmpty())
-						texto += "n�o tem garcons cadastrados\n";
-					else 
-						for(Garcom g: lista2) 
-							texto +=  g + "\n"; 
-
-					textArea.setText(texto);
+		
+		JLabel label = new JLabel("");
+		label.setFont(new Font("Times New Roman", Font.PLAIN, 24));
+		label.setBounds(57, 21, 418, 33);
+		contentPane.add(label);
+		
+		try{
+			String [] dado = null;
+			ArrayList<Garcom> garcons = Facade.listarGarcons();
+			if (garcons == null) {
+				label.setText("Nenhuma mesa cadastrada!");
+			}
+			else {
+				dado = new String[2];
+				String [] colunas = {"Nome", "garcons"};
+				tableModel = new TableModel(garcons.size(), colunas);
+				for (int i = 0; i < garcons.size(); i++) {
+					dado[0] = garcons.get(i).getApelido();
+					dado[1] = "";
+					for (Mesa m : garcons.get(i).getMesas())
+						dado[1]= dado[1].concat((String.valueOf(m.getId())+" - "));
+					tableModel.addRow(dado);
 				}
-				catch(Exception erro){
-					JOptionPane.showMessageDialog(null,erro.getMessage());
-				}
+				label.setText("Listagem de garcons:");
+			}
+		}
+		catch(Exception erro){
+			JOptionPane.showMessageDialog(null,erro.getMessage());
+			erro.printStackTrace();
+		}
+
+		table = new JTable(tableModel);
+		table.setBounds(190, 383, 191, 250);
+		JScrollPane scroll = new JScrollPane(table);
+		scroll.setBounds(57, 73, 418, 208);
+		contentPane.add(scroll);
+		
+		JButton btnFecharListagem = new JButton("Fechar Listagem");
+		btnFecharListagem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
 			}
 		});
-		
-		textArea = new JTextArea();		
-		JScrollPane scroll = new JScrollPane(textArea);
-		scroll.setBounds(24, 29, 510, 140);
-		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		contentPane.add(scroll);
+		btnFecharListagem.setBounds(310, 312, 165, 35);
+		btnFecharListagem.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		contentPane.add(btnFecharListagem);
 	}
 }
+
+

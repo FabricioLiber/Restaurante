@@ -48,7 +48,7 @@ public class TelaListagemMesa extends JFrame {
 		try{
 			String [] dado = null;
 			ArrayList<Mesa> mesas = Facade.listarMesas();
-			if (mesas.isEmpty()) {
+			if (mesas == null) {
 				label.setText("Nenhuma mesa cadastrada!");
 			}
 			else {
