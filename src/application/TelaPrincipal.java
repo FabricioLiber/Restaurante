@@ -180,6 +180,15 @@ public class TelaPrincipal {
 		});
 		mnConta.add(mntmListarContas);
 		
+		JMenuItem mntmPagarContas = new JMenuItem("Pagar");
+		mntmPagarContas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaPagarConta j = new TelaPagarConta();
+				j.setVisible(true);
+			}
+		});
+		mnConta.add(mntmPagarContas);
+		
 		JMenuItem mntmFecharConta = new JMenuItem("Fechar");
 		mntmFecharConta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -236,6 +245,15 @@ public class TelaPrincipal {
 			}
 		});
 		mnGarcom.add(mntmExclusaoGarcom);
+		
+		JMenuItem mntmPercentualDesconto = new JMenuItem("Percentual Desconto");
+		mntmPercentualDesconto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaPercentualDesconto j = new TelaPercentualDesconto();
+				j.setVisible(true);
+			}
+		});
+		mnGarcom.add(mntmPercentualDesconto);
 		
 		JMenu mnConsulta = new JMenu("Consulta");
 		mnConsulta.addMouseListener(new MouseAdapter() {

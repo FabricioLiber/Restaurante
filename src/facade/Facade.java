@@ -176,7 +176,7 @@ public class Facade {
 			}				
 			cancelarConta(idmesaorigem);
 		} else
-			throw new Exception("Não e possivel transferir para mesa de outro Garcom!");
+			throw new Exception("Nao e possivel transferir para mesa de outro Garcom!");
 	}
 	
 	// Metodo que atualiza  a  data  de  fechamento  da  conta (Atualizar total)
@@ -191,7 +191,7 @@ public class Facade {
 			c.setDtfechamento(dataFechamento);
 			m.setOcupada(false);
 		} else
-			throw new Exception("Mesa não possui conta em aberto!");
+			throw new Exception("Mesa nao possui conta em aberto!");
 	}
 	
 	// Metodo que calcula a gorjeta do garcom
@@ -224,6 +224,8 @@ public class Facade {
 		Conta c = m.localizarUltimaConta();
 		if (c == null)
 			throw new Exception ("Nao existe conta a mesa indicada!");
+		if(c.getTotal()/quantidade < 100)
+			throw new Exception ("Valor de parcela abaixo de 100 reais nao permitido!");
 		if (c.getPagamento() != null)
 			throw new Exception ("Todas as contas da mesa "+ idmesa +" foram pagas!");
 		Pagamento p;
@@ -235,6 +237,7 @@ public class Facade {
 			throw new Exception ("Forma de pagamento inválida!");
 		p.calcularPagamento(c.getTotal());
 		c.setPagamento(p);
+		fecharConta(idmesa);
 		return p;
 	}
 	

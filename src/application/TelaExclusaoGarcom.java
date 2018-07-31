@@ -28,7 +28,7 @@ public class TelaExclusaoGarcom extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaExclusaoGarcom() {
-		setTitle("Calcular Gorjeta");
+		setTitle("Excluir garcom");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 320, 147);

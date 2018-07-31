@@ -18,7 +18,7 @@ public class PagamentoDinheiro extends Pagamento {
 	@Override
 	public void calcularPagamento(double totalconta) {
 		// TODO Auto-generated method stub
-		this.setValorpago(totalconta - (totalconta * (percentualdesconto / 100)));
+		this.setValorpago(totalconta - (totalconta * (((double) percentualdesconto) / 100) ));
 	}
 	
 	
