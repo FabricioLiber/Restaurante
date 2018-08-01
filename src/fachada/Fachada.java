@@ -29,7 +29,7 @@ public class Fachada {
 	 */
 	public static ArrayList<Produto> listarProdutos (String nome) throws Exception {
 		if (restaurante.getProdutos().isEmpty())
-			return null;
+			return restaurante.getProdutos();
 		ArrayList<Produto> produtos = restaurante.localizarProdutosPorNome(nome);
 		if (produtos.isEmpty())
 			throw new Exception("Nenhum produto encontrado com essa combinacao de caracteres (\""+ nome+"\")!");
@@ -42,10 +42,13 @@ public class Fachada {
 	}
 	
 	// Metodo que retorna  todos  os  garcons  do  restaurante.
-	public static TreeMap<String, Garcom> listarGarcons () throws Exception {
-		if (restaurante.getGarcons() != null)
-			return  restaurante.getGarcons();
-		return null;
+	public static ArrayList<Garcom> listarGarcons () throws Exception {
+		ArrayList<Garcom> garcons = new ArrayList<>();
+		if (restaurante.getGarcons() != null) {
+			for (Garcom g : restaurante.getGarcons().values())
+				garcons.add(g);
+		}
+		return garcons;
 	}
 
 	// Metodo que retorna  todas  as  mesas  do  restaurante.
@@ -57,8 +60,6 @@ public class Fachada {
 	
 	// Metodo que retorna  todas  as  contas  do  restaurante.
 	public static ArrayList<Conta> listarContas () throws Exception {
-		if (restaurante.getContas().isEmpty())
-			return null;
 		return restaurante.getContas();			
 	}
 	
@@ -112,6 +113,8 @@ public class Fachada {
 		Conta c;
 		if (m == null)
 			throw new Exception("Mesa invalida!");
+		if(m.getGarcom() == null)
+			throw new Exception("Mesa nao possui garcom!");
 		if (m.localizarContaEmAberto() == null) {
 			c = new Conta(geraId("Conta"), m);	
 			restaurante.adicionar(c);
@@ -132,8 +135,7 @@ public class Fachada {
 		Conta c = m.localizarUltimaConta();
 		if (c != null)
 			return c;
-		else
-			throw new Exception("Nao existe conta na mesa indicada!");
+		return null;
 	}
 	
 	// Metodo que adiciona um produto na  conta
@@ -144,6 +146,8 @@ public class Fachada {
 			throw new Exception("Produto nao localizado!");
 		if (m == null)
 			throw new Exception("Mesa nao localizada!");
+		if (m.getGarcom() == null)
+			throw new Exception("Mesa nao possui garcom responsavel!");
 		Conta c = m.localizarContaEmAberto();
 		if (c == null)
 			throw new Exception("Mesa nao possui conta em aberto!");
@@ -166,6 +170,8 @@ public class Fachada {
 	origem para a conta destino e cancela a conta origem. 
 	*/
 	public static void transferirConta (int idmesaorigem, int idmesadestino) throws Exception {
+		if (idmesaorigem == idmesadestino)
+			throw new Exception ("Transferencia para a mesma mesa nao e valida!");
 		Mesa mesaOrigem = restaurante.localizarMesaPorID(idmesaorigem);
 		Conta contaOrigem = mesaOrigem.localizarContaEmAberto();
 		Mesa mesaDestino = restaurante.localizarMesaPorID(idmesadestino);
@@ -251,7 +257,7 @@ public class Fachada {
 	
 	// Exclui  o  garcom  do  restaurante.   
 	public  static  void excluirGarcom (String nome) throws Exception {
-		Garcom g = restaurante.getGarcons().get(nome);
+		Garcom g = restaurante.localizarGarcom(nome);
 		if (g == null)
 			throw new Exception("Garcom nao localizado!");
 		for (Mesa m : g.getMesas())
@@ -264,7 +270,8 @@ public class Fachada {
 	/* Retorna  o  percentual  medio  aplicado  aos    pagamentos
     em  dinheiro  das  contas  das  mesas  do  garcom.*/
 	public  static  double  calcularPercentualMedio (String apelido) throws Exception {
-		int quantidadeDescontoPagamentoDinheiro = 0, totalDescontoPagamentoDinheiro = 0;
+		int quantidadeDescontoPagamentoDinheiro = 0;
+		double totalDescontoPagamentoDinheiro = 0;
 		Garcom g = restaurante.localizarGarcom(apelido);
 		if (g == null)
 			throw new Exception("Garcom nao localizado!");

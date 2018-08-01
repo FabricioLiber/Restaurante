@@ -31,6 +31,11 @@ public class PagamentoCartao extends Pagamento {
 		else if (quantidadeparcelas == 4)
 			this.setValorpago(totalconta + (totalconta * 0.2));
 	}
+	@Override
+	public String toString() {
+		return "PagamentoCartao [cartao=" + cartao + ", quantidadeparcelas=" + quantidadeparcelas + "]";
+	}
+	
 	
 	
 	

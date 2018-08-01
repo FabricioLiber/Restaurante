@@ -20,6 +20,13 @@ public class PagamentoDinheiro extends Pagamento {
 		// TODO Auto-generated method stub
 		this.setValorpago(totalconta - (totalconta * (((double) percentualdesconto) / 100) ));
 	}
+
+	@Override
+	public String toString() {
+		return "PagamentoDinheiro [percentualdesconto=" + percentualdesconto + "]";
+	}
+	
+	
 	
 	
 }

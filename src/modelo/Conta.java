@@ -21,11 +21,15 @@ public class Conta {
 		this.produtos = new ArrayList<>();
 	}
 
+	
+
 	@Override
 	public String toString() {
-		return "Conta [numero=" + numero + ", dtfechamento=" + dtfechamento + ", total=" + total + ", mesa=" + mesa.getId()
-				+ ", produtos=" + produtos + "]";
+		return "Conta [numero=" + numero + ", dtfechamento=" + dtfechamento + ", total=" + total + ", mesa=" + mesa
+				+ ", produtos=" + produtos + ", pagamento=" + pagamento + "]";
 	}
+
+
 
 	public String getDtfechamento() {
 		return dtfechamento;

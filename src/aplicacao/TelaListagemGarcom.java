@@ -47,7 +47,7 @@ public class TelaListagemGarcom extends JFrame {
 		
 		try{
 			String [] dado = null;
-			TreeMap<String, Garcom> garcons = Fachada.listarGarcons();
+			ArrayList<Garcom> garcons = Fachada.listarGarcons();
 			if (garcons == null) {
 				label.setText("Nenhuma mesa cadastrada!");
 			}
@@ -55,7 +55,7 @@ public class TelaListagemGarcom extends JFrame {
 				dado = new String[2];
 				String [] colunas = {"Nome", "garcons"};
 				tableModel = new TableModel(garcons.size(), colunas);
-				for (Garcom g : garcons.values()) {
+				for (Garcom g : garcons) {
 					dado[0] = g.getApelido();
 					dado[1] = "";
 					for (Mesa m : g.getMesas())

@@ -15,4 +15,10 @@ public abstract class Pagamento {
 	public double calcularGorjeta () {
 		return valorpago *0.1;
 	}
+
+	@Override
+	public String toString() {
+		return "Pagamento [valorpago=" + valorpago + "]";
+	}
+	
 }

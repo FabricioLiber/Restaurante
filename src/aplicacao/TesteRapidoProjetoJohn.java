@@ -14,7 +14,7 @@ import modelo.Garcom;
 import modelo.Mesa;
 import modelo.Produto;
 
-public class TesteRapidoProjeto {
+public class TesteRapidoProjetoJohn {
 	
 	public static void main (String[] args) {  
 		
@@ -63,7 +63,7 @@ public class TesteRapidoProjeto {
 			g = Fachada.cadastrarGarcom("esperto", 6,10);
 			g = Fachada.cadastrarGarcom("zezinho", 11,15);
 			g = Fachada.cadastrarGarcom("guerreirinho", 16,20);
-			TreeMap<String, Garcom> garcons = Fachada.listarGarcons();
+			ArrayList<Garcom> garcons = Fachada.listarGarcons();
 			System.out.println("garcons cadastrados:");
 			System.out.println(garcons);
               

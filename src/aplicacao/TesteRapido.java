@@ -42,7 +42,7 @@ public class TesteRapido {
 			g = Fachada.cadastrarGarcom("esperto", 6,10);
 			g = Fachada.cadastrarGarcom("zezinho", 11,15);
 			g = Fachada.cadastrarGarcom("zezinho", 16,20);
-			TreeMap<String, Garcom> garcons = Fachada.listarGarcons();
+			ArrayList<Garcom> garcons = Fachada.listarGarcons();
 			System.out.println("garcons cadastrados:");
 			System.out.println(garcons);
 		}catch (Exception e) {
