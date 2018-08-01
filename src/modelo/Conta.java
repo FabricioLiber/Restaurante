@@ -80,6 +80,12 @@ public class Conta {
 		this.produtos.remove(p);
 	}
 	
+	public void adicionar (ArrayList<Produto> produtos) {
+		this.produtos.addAll(produtos);
+		for (Produto p: produtos)
+			this.total += p.getPreco();
+	}
+	
 		
 	
 	

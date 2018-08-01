@@ -180,12 +180,8 @@ public class Fachada {
 			if (contaOrigem == null)
 				throw new Exception("Conta de Origem nao esta em aberto!");
 			if (contaDestino == null)
-				throw new Exception("Conta de Destino nao esta em aberto!");
-			for (int i = 0; i < contaOrigem.getProdutos().size(); i++) {
-				contaDestino.adicionar(contaOrigem.getProdutos().get(i));
-				contaOrigem.remover(contaOrigem.getProdutos().get(i));
-				i--;
-			}				
+				throw new Exception("Conta de Destino nao esta em aberto!");	
+			contaDestino.adicionar(contaOrigem.getProdutos());
 			cancelarConta(idmesaorigem);
 		} else
 			throw new Exception("Nao e possivel transferir para mesa de outro Garcom!");
@@ -216,10 +212,8 @@ public class Fachada {
 			for (Mesa m : g.getMesas()) {
 				if (!m.getContas().isEmpty())					
 					for (Conta c : m.getContas())
-						if (c.getDtfechamento() != null)
-							if (c.getDtfechamento().equals(dataFechamento))
-								if (c.getPagamento() != null)
-									totalGorjeta += c.getPagamento().calcularGorjeta();				
+						if (c.getPagamento() != null)
+							totalGorjeta += c.getPagamento().calcularGorjeta();				
 			}
 			return totalGorjeta;
 		} else
